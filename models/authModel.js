@@ -8,8 +8,8 @@ exports.findUserByEmail = async (email) => {
       k.id_karyawan, k.nama_karyawan, k.id_cabang,
       c.nama_cabang
     FROM user u
-    JOIN Karyawan k ON u.id_karyawan = k.id_karyawan
-    JOIN Cabang c ON k.id_cabang = c.id_cabang
+    JOIN karyawan k ON u.id_karyawan = k.id_karyawan
+    JOIN cabang c ON k.id_cabang = c.id_cabang
     WHERE u.email = ?
   `,
     [email]
@@ -20,7 +20,7 @@ exports.findUserByEmail = async (email) => {
 exports.saveDeviceToken = async (user_id, token) => {
   await db.execute(
     `
-    INSERT INTO DeviceToken (user_id, token)
+    INSERT INTO deviceToken (user_id, token)
     VALUES (?, ?)
     ON DUPLICATE KEY UPDATE token = VALUES(token)
   `,
